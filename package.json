@@ -1,7 +1,7 @@
 {
     "name": "randle",
     "description": "Tabletop gaming randomization bot for Discord.",
-    "version": "2.3.1",
+    "version": "2.3.2",
     "main": "./dist/app.js",
     "scripts": {
         "build": "tsc",
@@ -36,10 +36,10 @@
     },
     "license": "MIT",
     "author": {
-        "name": "Arcanigma Project",
-        "email": "contact@arcanigma.org",
-        "url": "https://github.com/arcanigma"
+        "name": "Ron Reaser",
+        "email": "ron@reaser.org",
+        "url": "https://github.com/ron-reaser"
     },
-    "repository": "github:arcanigma/randle",
+    "repository": "github:ron-reaser/randle",
     "private": true
 }
