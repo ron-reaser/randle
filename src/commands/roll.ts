@@ -37,8 +37,11 @@ export async function execute (interaction: ChatInputCommandInteraction): Promis
     const app_emojis = await interaction.client.application.emojis.fetch(),
         emoji_arrays = findEmojiArrays(text, app_emojis);
 
-    for (let i = 0; i < base_clauses; i++)
-        clauses.push(...expandRepeats(clauses.shift() as string));
+    for (let i = 0; i < base_clauses; i++) {
+        const front = clauses.shift();
+        if (front)
+            clauses.push(...expandRepeats(front));
+    }
 
     const embeds = rollDice(clauses, emoji_arrays);
 
@@ -147,7 +150,7 @@ function rollDice (clauses: string[], arrays: Record<string, string[]>): Embed[]
 
             fields.push({
                 name: trunc(code, MAX_FIELD_NAME),
-                value: trunc(`${atoms.join(' ')}`, MAX_FIELD_VALUE),
+                value: trunc(atoms.join(' '), MAX_FIELD_VALUE),
                 inline: true
             });
 
@@ -170,8 +173,8 @@ function rollDice (clauses: string[], arrays: Record<string, string[]>): Embed[]
                 title = slug[0].toUpperCase() + slug.slice(1);
 
             fields.push({
-                name: trunc(`${title}`, MAX_FIELD_NAME),
-                value: trunc(`${rolls.join(' ')}`, MAX_FIELD_VALUE),
+                name: trunc(title, MAX_FIELD_NAME),
+                value: trunc(rolls.join(' '), MAX_FIELD_VALUE),
                 inline: true
             });
 

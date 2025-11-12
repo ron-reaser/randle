@@ -1,11 +1,13 @@
 {
-    "extends": "@tsconfig/node22/tsconfig.json",
-    "include": [ "./src/**/*.ts" ],
+    "extends": "@tsconfig/node23/tsconfig.json",
+    "include": [
+        "eslint.config.mjs",
+        "./src/**/*.ts"
+    ],
     "compilerOptions": {
         "target": "ESNext",
         "outDir": "./dist/",
         "incremental": true,
-        "skipLibCheck": true,
         "sourceMap": true,
         "removeComments": true
     }

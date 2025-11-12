@@ -19,7 +19,7 @@ export async function execute (oldChannel: Channel, newChannel: Channel): Promis
             if (newChannel.topic.includes('|')) {
                 const [ first, ...rest ] = newChannel.topic.split('|').map(it => it.trim()).filter(Boolean).slice(0, MAX_EMBED_FIELDS+1);
 
-                const [ , title, description ] = first.match(re_bracketing) as string[];
+                const [ , title, description ] = re_bracketing.exec(first) as string[];
 
                 await newChannel.send({
                     content: `${by_user.toString()} set the topic:`,
@@ -29,7 +29,7 @@ export async function execute (oldChannel: Channel, newChannel: Channel): Promis
                             description: trunc(description, MAX_EMBED_DESCRIPTION),
                             color: Colors.Blurple,
                             fields: rest.map((it, index) => {
-                                const [ , name, value ] = it.match(re_bracketing) as string[];
+                                const [ , name, value ] = re_bracketing.exec(it) as string[];
 
                                 return {
                                     name: name ? trunc(name, MAX_FIELD_NAME) : inflection.ordinalize(`${index+1} Subtopic`),

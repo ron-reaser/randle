@@ -9,7 +9,7 @@ export const data: ChatInputApplicationCommandData = {
     description: 'Shuffle items',
     options: [
         {
-            name: 'items',
+            name: "items",
             type: ApplicationCommandOptionType.String,
             description: 'A list of items, a range size, or an @everyone, @here, or @role mention',
             required: true

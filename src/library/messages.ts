@@ -30,7 +30,7 @@ export async function sendBlame (payload: unknown, interaction?: BaseInteraction
                         },
                         {
                             name: 'Channel',
-                            value: trunc(`${interaction.channel?.toString() ?? 'unknown'}`, MAX_FIELD_VALUE),
+                            value: trunc(interaction.channel?.toString() ?? 'unknown', MAX_FIELD_VALUE),
                             inline: true
                         },
                         ... ( interaction instanceof ChatInputCommandInteraction

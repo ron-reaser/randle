@@ -10,7 +10,7 @@ declare module 'discord.js' {
     export interface ClientRoute {
         name: keyof ClientEvents;
         once: boolean;
-        register: (app: unknown, port?: number, client?: Client<boolean>) => void;
+        register: (app: unknown, port?: number, client?: Client) => void;
     }
 
     export interface ClientEvent {

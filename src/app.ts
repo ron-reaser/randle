@@ -46,9 +46,9 @@ try {
             else if (folder == 'events') {
                 const event = await import(filePath) as ClientEvent;
                 if (event.once)
-                    client.once(event.name, (...args) => event.execute(...args));
+                    client.once(event.name, (...args) => { event.execute(...args); });
                 else
-                    client.on(event.name, (...args) => event.execute(...args));
+                    client.on(event.name, (...args) => { event.execute(...args); });
                 console.debug(`Discord loaded ${event.name} event.`);
             }
             else if (folder == 'commands') {
