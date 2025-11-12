@@ -1,5 +1,5 @@
 import { randomInt } from 'crypto';
-import { wss } from './texts.js';
+import { wss } from './texts.mts';
 
 export function listOf<T> (it: T | T[]): T[] {
     if (Array.isArray(it))

@@ -1,5 +1,5 @@
 import { Client } from 'discord.js';
-import { Express } from 'express';
+import { type Express } from 'express';
 
 export const name = 'health';
 

@@ -1,5 +1,5 @@
-import { ActivityType, ApplicationCommandOptionType, ApplicationCommandType, ChatInputApplicationCommandData, ChatInputCommandInteraction, MessageFlags } from 'discord.js';
-import { MAX_CUSTOM_STATUS } from '../library/constants.js';
+import { ActivityType, ApplicationCommandOptionType, ApplicationCommandType, type ChatInputApplicationCommandData, ChatInputCommandInteraction, MessageFlags } from 'discord.js';
+import { MAX_CUSTOM_STATUS } from '../library/constants.mts';
 
 export const READY_ACTIVITY = '🎲 Ready to Roll';
 export const MAINTENANCE_ACTIVITY = '🏗️ Down for Maintenance';

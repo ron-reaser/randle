@@ -1,14 +1,11 @@
 {
-    "extends": "@tsconfig/node23/tsconfig.json",
-    "include": [
-        "eslint.config.mjs",
-        "./src/**/*.ts"
-    ],
     "compilerOptions": {
         "target": "ESNext",
-        "outDir": "./dist/",
-        "incremental": true,
-        "sourceMap": true,
-        "removeComments": true
+        "module": "NodeNext",
+        "noEmit": true,
+        "allowImportingTsExtensions": true,
+        "rewriteRelativeImportExtensions": true,
+        "verbatimModuleSyntax": true,
+        "erasableSyntaxOnly": true
     }
 }
