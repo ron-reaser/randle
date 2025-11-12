@@ -1,5 +1,5 @@
-import { ActivityType, ApplicationCommandOptionType, ApplicationCommandType, ChatInputApplicationCommandData, ChatInputCommandInteraction, MessageFlags } from 'discord.js';
-import { MAX_CUSTOM_STATUS } from '../library/constants.js';
+import { ActivityType, ApplicationCommandOptionType, ApplicationCommandType, type ChatInputApplicationCommandData, ChatInputCommandInteraction, MessageFlags } from 'discord.js';
+import { MAX_CUSTOM_STATUS } from '../library/constants.mts';
 
 export const READY_ACTIVITY = '🎲 Ready to Roll';
 export const MAINTENANCE_ACTIVITY = '🏗️ Down for Maintenance';
@@ -23,7 +23,7 @@ export const data: ChatInputApplicationCommandData = {
 };
 
 export async function execute (interaction: ChatInputCommandInteraction): Promise<void> {
-    const activity = (interaction.options.get('input')?.value as string).toLowerCase();
+    const activity = (interaction.options.get('input')?.value as string);
 
     if (activity == 'reset') {
         interaction.client.user.setPresence({

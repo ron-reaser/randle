@@ -6,6 +6,6 @@ services:
   envVars:
   - key: DISCORD_TOKEN
     sync: false
-  buildCommand: npm ci; npm run build
+  buildCommand: npm ci
   startCommand: npm run start
   healthCheckPath: /health

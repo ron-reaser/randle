@@ -1,12 +1,12 @@
 import { randomInt } from 'crypto';
-import { color, RGBColor } from 'd3-color';
+import { color, type RGBColor } from 'd3-color';
 import { interpolateRgb, piecewise } from 'd3-interpolate';
-import { ApplicationCommandOptionType, ApplicationCommandType, ChatInputApplicationCommandData, ChatInputCommandInteraction, Collection, Colors, Embed, EmbedField, Emoji, MessageFlags } from 'discord.js';
+import { ApplicationCommandOptionType, ApplicationCommandType, type ChatInputApplicationCommandData, ChatInputCommandInteraction, Collection, Colors, Embed, type EmbedField, Emoji, MessageFlags } from 'discord.js';
 import * as inflection from 'inflection';
-import { MAX_EMBED_TITLE, MAX_FIELD_NAME, MAX_FIELD_VALUE } from '../library/constants.js';
-import { repeat } from '../library/lists.js';
-import { truncEmbeds, truncFields } from '../library/messages.js';
-import { trunc, wss } from '../library/texts.js';
+import { MAX_EMBED_TITLE, MAX_FIELD_NAME, MAX_FIELD_VALUE } from '../library/constants.mts';
+import { repeat } from '../library/lists.mts';
+import { truncEmbeds, truncFields } from '../library/messages.mts';
+import { trunc, wss } from '../library/texts.mts';
 
 export const data: ChatInputApplicationCommandData = {
     type: ApplicationCommandType.ChatInput,

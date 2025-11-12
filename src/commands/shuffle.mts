@@ -1,7 +1,7 @@
-import { ApplicationCommandOptionType, ApplicationCommandType, ChatInputApplicationCommandData, ChatInputCommandInteraction } from 'discord.js';
-import { MAX_EMBED_DESCRIPTION } from '../library/constants.js';
-import { shuffleInPlace } from '../library/lists.js';
-import { commas, itemize, trunc, wss } from '../library/texts.js';
+import { ApplicationCommandOptionType, ApplicationCommandType, type ChatInputApplicationCommandData, ChatInputCommandInteraction } from 'discord.js';
+import { MAX_EMBED_DESCRIPTION } from '../library/constants.mts';
+import { shuffleInPlace } from '../library/lists.mts';
+import { commas, itemize, trunc, wss } from '../library/texts.mts';
 
 export const data: ChatInputApplicationCommandData = {
     type: ApplicationCommandType.ChatInput,

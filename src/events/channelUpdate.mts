@@ -1,7 +1,7 @@
-import { AuditLogEvent, Channel, Colors, Events, TextChannel } from 'discord.js';
+import { AuditLogEvent, type Channel, Colors, Events, TextChannel } from 'discord.js';
 import * as inflection from 'inflection';
-import { MAX_EMBED_DESCRIPTION, MAX_EMBED_FIELDS, MAX_EMBED_TITLE, MAX_FIELD_NAME, MAX_FIELD_VALUE } from '../library/constants.js';
-import { trunc } from '../library/texts.js';
+import { MAX_EMBED_DESCRIPTION, MAX_EMBED_FIELDS, MAX_EMBED_TITLE, MAX_FIELD_NAME, MAX_FIELD_VALUE } from '../library/constants.mts';
+import { trunc } from '../library/texts.mts';
 
 export const name = Events.ChannelUpdate;
 export const once = false;
