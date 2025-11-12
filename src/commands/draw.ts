@@ -1,4 +1,4 @@
-import { ApplicationCommandOptionType, ApplicationCommandType, ChatInputApplicationCommandData, CommandInteraction } from 'discord.js';
+import { ApplicationCommandOptionType, ApplicationCommandType, ChatInputApplicationCommandData, ChatInputCommandInteraction } from 'discord.js';
 import { MAX_EMBED_DESCRIPTION } from '../library/constants.js';
 import { choose } from '../library/lists.js';
 import { commas, itemize, trunc, wss } from '../library/texts.js';
@@ -23,7 +23,7 @@ export const data: ChatInputApplicationCommandData = {
     ]
 };
 
-export async function execute (interaction: CommandInteraction): Promise<void> {
+export async function execute (interaction: ChatInputCommandInteraction): Promise<void> {
     const elements = interaction.options.get('items')?.value as string,
         quantity = (interaction.options.get('quantity')?.value ?? 1) as number;
 

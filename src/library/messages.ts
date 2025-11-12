@@ -1,4 +1,4 @@
-import { BaseInteraction, CommandInteraction, Embed, EmbedField, MessageFlags } from 'discord.js';
+import { BaseInteraction, ChatInputCommandInteraction, Embed, EmbedField, MessageFlags } from 'discord.js';
 import { MAX_EMBED_FIELDS, MAX_FIELD_NAME, MAX_FIELD_VALUE, MAX_MESSAGE_EMBEDS } from './constants.js';
 import { trunc } from './texts.js';
 
@@ -33,7 +33,7 @@ export async function sendBlame (payload: unknown, interaction?: BaseInteraction
                             value: trunc(`${interaction.channel?.toString() ?? 'unknown'}`, MAX_FIELD_VALUE),
                             inline: true
                         },
-                        ... ( interaction instanceof CommandInteraction
+                        ... ( interaction instanceof ChatInputCommandInteraction
                             ? [
                                 {
                                     name: 'Command',

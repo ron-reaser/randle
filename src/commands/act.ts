@@ -1,4 +1,4 @@
-import { ActivityType, ApplicationCommandOptionType, ApplicationCommandType, ChatInputApplicationCommandData, CommandInteraction, MessageFlags } from 'discord.js';
+import { ActivityType, ApplicationCommandOptionType, ApplicationCommandType, ChatInputApplicationCommandData, ChatInputCommandInteraction, MessageFlags } from 'discord.js';
 import { MAX_CUSTOM_STATUS } from '../library/constants.js';
 
 export const READY_ACTIVITY = '🎲 Ready to Roll';
@@ -22,7 +22,7 @@ export const data: ChatInputApplicationCommandData = {
     ]
 };
 
-export async function execute (interaction: CommandInteraction): Promise<void> {
+export async function execute (interaction: ChatInputCommandInteraction): Promise<void> {
     const activity = (interaction.options.get('input')?.value as string).toLowerCase();
 
     if (activity == 'reset') {

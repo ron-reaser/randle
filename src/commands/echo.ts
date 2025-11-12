@@ -1,4 +1,4 @@
-import { ApplicationCommandOptionType, ApplicationCommandType, ChatInputApplicationCommandData, CommandInteraction, MessageFlags } from 'discord.js';
+import { ApplicationCommandOptionType, ApplicationCommandType, ChatInputApplicationCommandData, ChatInputCommandInteraction, MessageFlags } from 'discord.js';
 import { MAX_MESSAGE_LENGTH } from '../library/constants.js';
 
 export const data: ChatInputApplicationCommandData = {
@@ -16,7 +16,7 @@ export const data: ChatInputApplicationCommandData = {
     ]
 };
 
-export async function execute (interaction: CommandInteraction): Promise<void> {
+export async function execute (interaction: ChatInputCommandInteraction): Promise<void> {
     const input = interaction.options.get('input')?.value as string;
 
     await interaction.reply({

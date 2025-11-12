@@ -1,7 +1,7 @@
 import { randomInt } from 'crypto';
 import { color, RGBColor } from 'd3-color';
 import { interpolateRgb, piecewise } from 'd3-interpolate';
-import { ApplicationCommandOptionType, ApplicationCommandType, ChatInputApplicationCommandData, Collection, Colors, CommandInteraction, Embed, EmbedField, Emoji, MessageFlags } from 'discord.js';
+import { ApplicationCommandOptionType, ApplicationCommandType, ChatInputApplicationCommandData, ChatInputCommandInteraction, Collection, Colors, Embed, EmbedField, Emoji, MessageFlags } from 'discord.js';
 import * as inflection from 'inflection';
 import { MAX_EMBED_TITLE, MAX_FIELD_NAME, MAX_FIELD_VALUE } from '../library/constants.js';
 import { repeat } from '../library/lists.js';
@@ -29,7 +29,7 @@ const color_gradient = piecewise(interpolateRgb, [
 ]);
 
 const re_boundary = /\s*;\s*/;
-export async function execute (interaction: CommandInteraction): Promise<void> {
+export async function execute (interaction: ChatInputCommandInteraction): Promise<void> {
     const text = interaction.options.get('text')?.value as string,
         clauses = text.trim().split(re_boundary),
         base_clauses = clauses.length;
