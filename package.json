@@ -1,7 +1,7 @@
 {
     "name": "randle",
     "description": "Tabletop gaming randomization bot for Discord",
-    "version": "2.4.1",
+    "version": "2.4.2",
     "type": "module",
     "main": "src/app.mts",
     "scripts": {
@@ -10,7 +10,7 @@
         "start": "node src/app.mts"
     },
     "engines": {
-        "node": "^23"
+        "node": "^24"
     },
     "dependencies": {
         "d3-color": "^3.1.0",
