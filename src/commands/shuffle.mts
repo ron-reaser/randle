@@ -9,7 +9,7 @@ export const data: ChatInputApplicationCommandData = {
     description: 'Shuffle items',
     options: [
         {
-            name: "items",
+            name: 'items',
             type: ApplicationCommandOptionType.String,
             description: 'A list of items, a range size, or an @everyone, @here, or @role mention',
             required: true
@@ -23,9 +23,9 @@ export async function execute (interaction: ChatInputCommandInteraction): Promis
 
     await interaction.reply({
         content: `${interaction.user.toString()} shuffled ${items.length != 1 ? 'items' : 'an item'}`,
-        embeds: [{
+        embeds: [ {
             title: `${items.length} Item${items.length != 1 ? 's' : ''}`,
             description: trunc(commas(items.map(item => `**${wss(item)}**`)), MAX_EMBED_DESCRIPTION)
-        }]
+        } ]
     });
 }

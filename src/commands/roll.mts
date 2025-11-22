@@ -53,10 +53,10 @@ export async function execute (interaction: ChatInputCommandInteraction): Promis
     }
     else {
         await interaction.reply({
-            embeds: [{
+            embeds: [ {
                 title: '⚠️ Warning',
                 description: 'There were no dice to roll.'
-            }],
+            } ],
             flags: MessageFlags.Ephemeral
         });
     }
@@ -70,7 +70,7 @@ function expandRepeats (clause: string) {
         const text = parts[0].replace(re_trail, ''),
             list = parts[1].split(re_commas),
             reps = parseInt(list[0]);
-        const clones = [];
+        const clones: string[] = [];
         if (list.length == 1 && reps >= 1)
             for (let i = 1; i <= reps; i++)
                 clones.push(`${text} on the ${inflection.ordinalize(String(i))} roll`);
@@ -80,7 +80,7 @@ function expandRepeats (clause: string) {
         return clones;
     }
     else {
-        return [clause];
+        return [ clause ];
     }
 }
 
@@ -125,7 +125,7 @@ function rollDice (clauses: string[], arrays: Record<string, string[]>): Embed[]
                 rolls.push(modifier);
 
             let total = 0;
-            const atoms = [];
+            const atoms: string[] = [];
             for (const roll of rolls) {
                 const sign = roll >= 0 ? '+' : '-',
                     face = Math.abs(roll);
@@ -135,7 +135,7 @@ function rollDice (clauses: string[], arrays: Record<string, string[]>): Embed[]
 
                 if (!strikes[roll]) {
                     total += roll;
-                    atoms.push(face);
+                    atoms.push(`${face}`);
                 }
                 else {
                     strikes[roll]--;

@@ -5,13 +5,13 @@ export function listOf<T> (it: T | T[]): T[] {
     if (Array.isArray(it))
         return it.flat().filter(it => it !== undefined) as T[];
     else if (it !== undefined)
-        return [it];
+        return [ it ];
     else
         return [];
 }
 
 export function shuffleCopy<T> (list: T[]): T[] {
-    const copy = [...list];
+    const copy = [ ...list ];
     return shuffleInPlace(copy);
 }
 
@@ -47,7 +47,7 @@ export function repeat<T> (list: T[], quantity: number): T[] {
     if (list.length == 0)
         throw 'Repeat for unexpected empty list in script.';
 
-    const build = [];
+    const build: T[] = [];
     for (let i = 1; i <= quantity; i++)
         build.push(list[randomInt(0, list.length)]);
     return build;
@@ -88,7 +88,7 @@ export function last<T> (list: T[], quantity: number, fit = false): T[] {
 }
 
 export function cross<T> (list1: T[], list2: T[], delimiter?: T): string[] {
-    const build = [];
+    const build: string[] = [];
     for (const a of list1)
         for (const b of list2)
             build.push(`${String(a)}${delimiter ? String(delimiter) : ' \u2022 '}${String(b)}`);
@@ -96,7 +96,7 @@ export function cross<T> (list1: T[], list2: T[], delimiter?: T): string[] {
 }
 
 export function zip<T> (list1: T[], list2: T[], delimiter?: T): string[] {
-    const build = [],
+    const build: string[] = [],
         a = shuffleCopy(list1),
         b = shuffleCopy(list2);
     while (a.length >= 1 && b.length >= 1)

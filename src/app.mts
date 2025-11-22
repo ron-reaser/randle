@@ -61,23 +61,23 @@ try {
 
     client.once(Events.ClientReady, async () => {
         if (process.env.REGISTER_COMMANDS === 'true') {
-            const commands = [...client.commands.values()].map(it => it.data);
-            await client.application.commands.set(commands);
+            const commands = [ ...client.commands.values() ].map(it => it.data);
+            await client.application?.commands.set(commands);
             console.debug(`Discord registered ${commands.length} commands.`);
         }
 
         if (process.env.MAINTENANCE_MODE !== 'true') {
             console.debug('Discord ready.');
-            client.user.setPresence({
+            client.user?.setPresence({
                 status: PresenceUpdateStatus.Online,
-                activities: [{ name: READY_ACTIVITY, type: ActivityType.Custom }]
+                activities: [ { name: READY_ACTIVITY, type: ActivityType.Custom } ]
             });
         }
         else {
             console.debug('Discord in maintenance mode.');
-            client.user.setPresence({
+            client.user?.setPresence({
                 status: PresenceUpdateStatus.DoNotDisturb,
-                activities: [{ name: MAINTENANCE_ACTIVITY, type: ActivityType.Custom }]
+                activities: [ { name: MAINTENANCE_ACTIVITY, type: ActivityType.Custom } ]
             });
         }
 

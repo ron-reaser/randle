@@ -27,7 +27,7 @@ export async function execute (interaction: ChatInputCommandInteraction): Promis
 
     if (activity == 'reset') {
         interaction.client.user.setPresence({
-            activities: [{ name: DEFAULT_ACTIVITY, type: ActivityType.Custom }]
+            activities: [ { name: DEFAULT_ACTIVITY, type: ActivityType.Custom } ]
         });
 
         await interaction.reply({
@@ -47,7 +47,7 @@ export async function execute (interaction: ChatInputCommandInteraction): Promis
     }
     else {
         interaction.client.user.setPresence({
-            activities: [{ name: activity, type: ActivityType.Custom }]
+            activities: [ { name: activity, type: ActivityType.Custom } ]
         });
 
         await interaction.reply({

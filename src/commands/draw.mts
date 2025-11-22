@@ -39,9 +39,9 @@ export async function execute (interaction: ChatInputCommandInteraction): Promis
 
     await interaction.reply({
         content: `${interaction.user.toString()} drew ${items.length != 1 ? 'items' : 'an item'}`,
-        embeds: [{
+        embeds: [ {
             title: `${items.length} Item${items.length != 1 ? 's' : ''}`,
             description: trunc(commas(items.map(item => `**${wss(item)}**`)), MAX_EMBED_DESCRIPTION)
-        }]
+        } ]
     });
 }
