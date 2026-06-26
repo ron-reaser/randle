@@ -1,7 +1,7 @@
-import { ApplicationCommandOptionType, ApplicationCommandType, type ChatInputApplicationCommandData, ChatInputCommandInteraction } from 'discord.js';
-import { MAX_EMBED_DESCRIPTION } from '../library/constants.mts';
-import { shuffleInPlace } from '../library/lists.mts';
-import { commas, itemize, trunc, wss } from '../library/texts.mts';
+import { ApplicationCommandOptionType, ApplicationCommandType, type ChatInputApplicationCommandData, ChatInputCommandInteraction, Colors, ComponentType, MessageFlags } from 'discord.js';
+import { MAX_EMBED_DESCRIPTION } from '../lib/constants.mts';
+import { shuffleInPlace } from '../lib/lists.mts';
+import { commas, itemize, trunc, wss } from '../lib/texts.mts';
 
 export const data: ChatInputApplicationCommandData = {
     type: ApplicationCommandType.ChatInput,
@@ -14,7 +14,7 @@ export const data: ChatInputApplicationCommandData = {
             description: 'A list of items or a range size',
             required: true
         },
-{
+        {
             name: 'spoiler',
             type: ApplicationCommandOptionType.Boolean,
             description: 'Whether to spoiler the results (or false by default)',
@@ -68,9 +68,9 @@ export async function execute (interaction: ChatInputCommandInteraction): Promis
     //                 {
     //                     type: ComponentType.TextDisplay,
     //                     content: trunc(commas(items.map(item => `**${wss(item)}**`)), MAX_EMBED_DESCRIPTION)
-        //                 }
+    //                 }
     //             ]
-//         }
+    //         }
     //     ]
     // });
 }

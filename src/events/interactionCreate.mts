@@ -1,5 +1,5 @@
 import { Events, type Interaction } from 'discord.js';
-import { sendBlame } from '../library/messages.mts';
+import { sendBlame } from '../lib/messages.mts';
 
 export const name = Events.InteractionCreate;
 export const once = false;

@@ -1,5 +1,5 @@
 import { ApplicationCommandOptionType, ApplicationCommandType, type ChatInputApplicationCommandData, ChatInputCommandInteraction, MessageFlags } from 'discord.js';
-import { MAX_MESSAGE_LENGTH } from '../library/constants.mts';
+import { MAX_MESSAGE_LENGTH } from '../lib/constants.mts';
 
 export const data: ChatInputApplicationCommandData = {
     type: ApplicationCommandType.ChatInput,

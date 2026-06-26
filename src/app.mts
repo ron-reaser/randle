@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { MAINTENANCE_ACTIVITY, READY_ACTIVITY } from './commands/act.mts';
-import { sendBlame } from './library/messages.mts';
+import { sendBlame } from './lib/messages.mts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -62,19 +62,20 @@ try {
     client.once(Events.ClientReady, async () => {
         if (process.env.REGISTER_COMMANDS === 'true') {
             const commands = [ ...client.commands.values() ].map(it => it.data);
+            // TODO handle invalid form body error
             await client.application?.commands.set(commands);
             console.debug(`Discord registered ${commands.length} commands.`);
         }
 
         if (process.env.MAINTENANCE_MODE !== 'true') {
-            console.debug('Discord ready.');
+            console.debug('Discord ready (live).');
             client.user?.setPresence({
                 status: PresenceUpdateStatus.Online,
                 activities: [ { name: READY_ACTIVITY, type: ActivityType.Custom } ]
             });
         }
         else {
-            console.debug('Discord in maintenance mode.');
+            console.debug('Discord ready (maintenance).');
             client.user?.setPresence({
                 status: PresenceUpdateStatus.DoNotDisturb,
                 activities: [ { name: MAINTENANCE_ACTIVITY, type: ActivityType.Custom } ]

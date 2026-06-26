@@ -1,8 +1,8 @@
 import { ActivityType, ApplicationCommandOptionType, ApplicationCommandType, type ChatInputApplicationCommandData, ChatInputCommandInteraction, MessageFlags } from 'discord.js';
-import { MAX_CUSTOM_STATUS } from '../library/constants.mts';
+import { MAX_CUSTOM_STATUS } from '../lib/constants.mts';
 
 export const READY_ACTIVITY = '🎲 Ready to Roll';
-export const MAINTENANCE_ACTIVITY = '🏗️ Down for Maintenance';
+export const MAINTENANCE_ACTIVITY = '🏗️ In Maintenance Mode';
 export const DEFAULT_ACTIVITY = process.env.MAINTENANCE_MODE !== 'true'
     ? READY_ACTIVITY
     : MAINTENANCE_ACTIVITY;
