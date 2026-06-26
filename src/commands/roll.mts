@@ -3,10 +3,10 @@ import { color, type RGBColor } from 'd3-color';
 import { interpolateRgb, piecewise } from 'd3-interpolate';
 import { ApplicationCommandOptionType, ApplicationCommandType, type ChatInputApplicationCommandData, ChatInputCommandInteraction, Collection, Colors, Embed, type EmbedField, Emoji, MessageFlags } from 'discord.js';
 import * as inflection from 'inflection';
-import { MAX_EMBED_TITLE, MAX_FIELD_NAME, MAX_FIELD_VALUE } from '../library/constants.mts';
-import { repeat } from '../library/lists.mts';
-import { truncEmbeds, truncFields } from '../library/messages.mts';
-import { trunc, wss } from '../library/texts.mts';
+import { MAX_EMBED_TITLE, MAX_FIELD_NAME, MAX_FIELD_VALUE } from '../lib/constants.mts';
+import { repeat } from '../lib/lists.mts';
+import { truncEmbeds, truncFields } from '../lib/messages.mts';
+import { trunc, wss } from '../lib/texts.mts';
 
 export const data: ChatInputApplicationCommandData = {
     type: ApplicationCommandType.ChatInput,

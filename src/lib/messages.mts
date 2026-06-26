@@ -101,7 +101,7 @@ export function truncFields (fields: EmbedField[], overflow: string): EmbedField
             name: '⚠️ Warning',
             value: `Too many ${overflow} to show (limit of ${MAX_EMBED_FIELDS}).`,
             inline: false
-        } as EmbedField;
+        };
     }
     return fields;
 }

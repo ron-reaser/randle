@@ -1,7 +1,7 @@
-import { ApplicationCommandOptionType, ApplicationCommandType, type ChatInputApplicationCommandData, ChatInputCommandInteraction } from 'discord.js';
-import { MAX_EMBED_DESCRIPTION } from '../library/constants.mts';
-import { choose } from '../library/lists.mts';
-import { commas, itemize, trunc, wss } from '../library/texts.mts';
+import { ApplicationCommandOptionType, ApplicationCommandType, type ChatInputApplicationCommandData, ChatInputCommandInteraction, Colors, ComponentType, MessageFlags } from 'discord.js';
+import { MAX_EMBED_DESCRIPTION } from '../lib/constants.mts';
+import { choose } from '../lib/lists.mts';
+import { commas, itemize, trunc, wss } from '../lib/texts.mts';
 
 export const data: ChatInputApplicationCommandData = {
     type: ApplicationCommandType.ChatInput,
