@@ -11,7 +11,7 @@ export const data: ChatInputApplicationCommandData = {
         {
             name: 'items',
             type: ApplicationCommandOptionType.String,
-            description: 'A list of items, a range size, or an @everyone, @here, or @role mention',
+            description: 'A list of items or a range size',
             required: true
         },
         {
@@ -19,29 +19,46 @@ export const data: ChatInputApplicationCommandData = {
             type: ApplicationCommandOptionType.Integer,
             description: 'Number of items to draw (or 1 by default)',
             required: false
+        },
+        {
+            name: 'spoiler',
+            type: ApplicationCommandOptionType.Boolean,
+            description: 'Whether to spoiler the results (or false by default)',
+            required: false
         }
     ]
 };
 
 export async function execute (interaction: ChatInputCommandInteraction): Promise<void> {
-    const elements = interaction.options.get('items')?.value as string,
-        quantity = (interaction.options.get('quantity')?.value ?? 1) as number;
+    const elements = itemize(interaction.options.get('items')?.value as string),
+        quantity = (interaction.options.get('quantity')?.value ?? 1) as number,
+        spoiler = (interaction.options.get('spoiler')?.value ?? false) as boolean;
 
-    let items = itemize(elements);
-
-    if (items.length < 1)
+    if (elements.length < 1)
         throw 'At least 1 item is required.';
-
-    if (items.length < quantity)
+    if (quantity > elements.length)
         throw 'Quantity must not exceed the number of items.';
 
-    items = choose(items, quantity);
+    const items = choose(elements, quantity);
 
     await interaction.reply({
-        content: `${interaction.user.toString()} drew ${items.length != 1 ? 'items' : 'an item'}`,
-        embeds: [ {
-            title: `${items.length} Item${items.length != 1 ? 's' : ''}`,
-            description: trunc(commas(items.map(item => `**${wss(item)}**`)), MAX_EMBED_DESCRIPTION)
-        } ]
+        flags: MessageFlags.IsComponentsV2,
+        components: [
+            {
+                type: ComponentType.TextDisplay,
+                content: `${interaction.user.toString()} drew **${items.length}** of **${elements.length}** item${elements.length != 1 ? 's' : ''}`,
+            },
+            {
+                type: ComponentType.Container,
+                accent_color: Colors.Greyple,
+                spoiler: spoiler,
+                components: [
+                    {
+                        type: ComponentType.TextDisplay,
+                        content: trunc(commas(items.map(item => `**${wss(item)}**`)), MAX_EMBED_DESCRIPTION),
+                    }
+                ]
+            }
+        ]
     });
 }

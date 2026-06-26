@@ -11,21 +11,66 @@ export const data: ChatInputApplicationCommandData = {
         {
             name: 'items',
             type: ApplicationCommandOptionType.String,
-            description: 'A list of items, a range size, or an @everyone, @here, or @role mention',
+            description: 'A list of items or a range size',
             required: true
         },
+{
+            name: 'spoiler',
+            type: ApplicationCommandOptionType.Boolean,
+            description: 'Whether to spoiler the results (or false by default)',
+            required: false
+        }
     ]
 };
 
 export async function execute (interaction: ChatInputCommandInteraction): Promise<void> {
-    const elements = interaction.options.get('items')?.value as string,
-        items = shuffleInPlace(itemize(elements));
+    const elements = itemize(interaction.options.get('items')?.value as string),
+        spoiler = (interaction.options.get('spoiler')?.value ?? false) as boolean,
+        items = shuffleInPlace(elements);
 
     await interaction.reply({
-        content: `${interaction.user.toString()} shuffled ${items.length != 1 ? 'items' : 'an item'}`,
-        embeds: [ {
-            title: `${items.length} Item${items.length != 1 ? 's' : ''}`,
-            description: trunc(commas(items.map(item => `**${wss(item)}**`)), MAX_EMBED_DESCRIPTION)
-        } ]
+        flags: MessageFlags.IsComponentsV2,
+        components: [
+            {
+                type: ComponentType.TextDisplay,
+                content: `${interaction.user.toString()} shuffled **${elements.length}** item${elements.length != 1 ? 's' : ''}`,
+            },
+            {
+                type: ComponentType.Container,
+                accent_color: Colors.Greyple,
+                spoiler: spoiler,
+                components: [
+                    {
+                        type: ComponentType.TextDisplay,
+                        content: trunc(commas(items.map(item => `**${wss(item)}**`)), MAX_EMBED_DESCRIPTION),
+                    }
+                ]
+            }
+        ]
     });
+
+    // await interaction.reply({
+    //     flags: MessageFlags.IsComponentsV2,
+    //     components: [
+    //         {
+    //             type: ComponentType.TextDisplay,
+    //             content: `${interaction.user.toString()} shuffled ${items.length != 1 ? 'items' : 'an item'}`,
+    //         },
+    //         {
+    //             type: ComponentType.Container,
+    //             accent_color: Colors.Greyple,
+    //             spoiler: true,
+    //             components: [
+    //                 {
+    //                     type: ComponentType.TextDisplay,
+    //                     content: `**${items.length} Item${items.length != 1 ? 's' : ''}**`
+    //                 },
+    //                 {
+    //                     type: ComponentType.TextDisplay,
+    //                     content: trunc(commas(items.map(item => `**${wss(item)}**`)), MAX_EMBED_DESCRIPTION)
+        //                 }
+    //             ]
+//         }
+    //     ]
+    // });
 }
