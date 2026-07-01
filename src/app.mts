@@ -40,7 +40,7 @@ try {
             const filePath = path.join(folderPath, file);
             if (folder == 'routes') {
                 const route = await import(filePath) as ClientRoute;
-                route.register(app, port, client);
+                route.register(app, client);
                 console.debug(`Express loaded ${route.name} route on port ${port}.`);
             }
             else if (folder == 'events') {

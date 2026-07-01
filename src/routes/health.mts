@@ -3,7 +3,7 @@ import { type Express } from 'express';
 
 export const name = 'health';
 
-export function register (app: Express, port: number, client: Client): void {
+export function register (app: Express, client: Client): void {
     app.get('/health', (_, res) => {
         let status: number;
         if (client.isReady())
