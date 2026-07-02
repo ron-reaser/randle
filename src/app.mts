@@ -3,31 +3,35 @@ import express from 'express';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { MAINTENANCE_ACTIVITY, READY_ACTIVITY } from './commands/act.mts';
 import { sendBlame } from './lib/messages.mts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+/*
+Intents:
+    Guilds [CHANNEL_UPDATE]
+Scopes:
+    applications.commands
+    bot
+Bot Permissions:
+    Send Messages
+    Send Messages in Threads
+    Use Slash Commands
+    View Audit Log [channelUpdate event]
+*/
+
 try {
-    /*  REQUIREMENTS
-        Intents:
-            Guilds (to receive channelUpdate event)
-        Scopes:
-            bot
-            applications.commands
-        Bot Permissions:
-            Use Slash Commands
-            Send Messages
-            Send Messages in Threads
-            View Audit Log [fetched in channelUpdate handler]
-    */
+    if (process.env.NODE_ENV != 'production' && process.env.NODE_ENV != 'development')
+        throw 'Environment must be production or development only.';
+    const environment = process.env.NODE_ENV;
+
     const client = new Client({ intents: [
         GatewayIntentBits.Guilds
     ] });
 
-    const app = express();
     const port = Number(process.env.PORT ?? 8080);
+    const app = express();
 
     for (const folder of [ 'routes', 'events', 'commands' ]) {
         const folderPath = path.join(__dirname, folder);
@@ -45,10 +49,7 @@ try {
             }
             else if (folder == 'events') {
                 const event = await import(filePath) as ClientEvent;
-                if (event.once)
-                    client.once(event.name, (...args) => { event.execute(...args); });
-                else
-                    client.on(event.name, (...args) => { event.execute(...args); });
+                client.on(event.name, (...args) => { event.trigger(...args); });
                 console.debug(`Discord loaded ${event.name} event.`);
             }
             else if (folder == 'commands') {
@@ -60,25 +61,22 @@ try {
     }
 
     client.once(Events.ClientReady, async () => {
-        if (process.env.REGISTER_COMMANDS === 'true') {
-            const commands = [ ...client.commands.values() ].map(it => it.data);
-            // TODO handle invalid form body error
-            await client.application?.commands.set(commands);
-            console.debug(`Discord registered ${commands.length} commands.`);
-        }
-
-        if (process.env.MAINTENANCE_MODE !== 'true') {
-            console.debug('Discord ready (live).');
+        if (environment == 'production') {
+            console.debug('Discord ready in production.');
             client.user?.setPresence({
                 status: PresenceUpdateStatus.Online,
-                activities: [ { name: READY_ACTIVITY, type: ActivityType.Custom } ]
+                activities: [ { name: '🎲 Ready to Roll', type: ActivityType.Custom } ]
             });
         }
-        else {
-            console.debug('Discord ready (maintenance).');
+        else if (environment == 'development') {
+            const commands = [ ...client.commands.values() ].map(it => it.data);
+            await client.application?.commands.set(commands);
+            console.debug(`Discord registered ${commands.length} commands.`);
+
+            console.debug('Discord ready in development.');
             client.user?.setPresence({
                 status: PresenceUpdateStatus.DoNotDisturb,
-                activities: [ { name: MAINTENANCE_ACTIVITY, type: ActivityType.Custom } ]
+                activities: [ { name: '🏗️ Maintenance', type: ActivityType.Custom } ]
             });
         }
 

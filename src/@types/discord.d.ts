@@ -8,19 +8,16 @@ declare module 'discord.js' {
 
     export interface ClientRoute {
         name: keyof ClientEvents;
-        once: boolean;
-        register: (app: unknown, client?: Client) => void;
+        register: (app: Express, client?: Client) => void;
     }
 
     export interface ClientEvent {
         name: keyof ClientEvents;
-        once: boolean;
-        execute: Parameters<Client['on']>[1] & Parameters<Client['once']>[1];
+        trigger: (...args: unknown[]) => Promise<void>;
     }
 
     export interface ClientCommand {
         data: ApplicationCommandData;
         execute: (interaction: CommandInteraction) => Promise<void>;
-        proceed: (interaction: MessageComponentInteraction) => Promise<void>;
     }
 }
