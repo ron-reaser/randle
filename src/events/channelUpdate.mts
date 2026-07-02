@@ -5,10 +5,9 @@ import { sendBlame } from '../lib/messages.mts';
 import { trunc } from '../lib/texts.mts';
 
 export const name = Events.ChannelUpdate;
-export const once = false;
 
 const re_bracketing = /^\s*(?:\[\s*([^\]]+?)\s*\]\s*)?(.+?)\s*$/;
-export async function execute (oldChannel: Channel, newChannel: Channel): Promise<void> {
+export async function trigger (oldChannel: Channel, newChannel: Channel): Promise<void> {
     try {
         if (oldChannel instanceof TextChannel && newChannel instanceof TextChannel) {
             if (newChannel.topic && newChannel.topic != oldChannel.topic) {

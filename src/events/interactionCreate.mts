@@ -2,29 +2,21 @@ import { Events, type Interaction } from 'discord.js';
 import { sendBlame } from '../lib/messages.mts';
 
 export const name = Events.InteractionCreate;
-export const once = false;
 
-export async function execute (interaction: Interaction): Promise<void> {
+export async function trigger (interaction: Interaction): Promise<void> {
     try {
-        if (interaction.isCommand()) {
+        if (interaction.isChatInputCommand()) {
             const command = interaction.client.commands.get(interaction.commandName);
 
             if (command) {
                 await command.execute(interaction);
-                return;
             }
             else {
                 throw `Unrecognized command name ${interaction.commandName}.`;
             }
         }
-        else if (interaction.isButton()) {
-            for (const [ commandName, command ] of interaction.client.commands.entries()) {
-                if (interaction.customId.startsWith(`${commandName}_`)) {
-                    await command.proceed(interaction);
-                    return;
-                }
-            }
-            throw `Unrecognized component identifier ${interaction.customId}.`;
+        else {
+            throw 'Unsupported interaction type.';
         }
     }
     catch (error: unknown) {
